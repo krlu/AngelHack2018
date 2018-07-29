@@ -3,7 +3,7 @@
 const baseUrl = "https://cdmbtzfa7a.execute-api.us-west-1.amazonaws.com/production"
 const locationsPath = "/bike/locations"
 const dropoffPath = "/bike/dropoff"
-const markerImagePath = 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+const markerImagePath = 'static/bike_small_'
 
 var map;
 
