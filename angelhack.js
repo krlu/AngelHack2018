@@ -28,7 +28,8 @@ function getDropoffLocation() {
 
 function populateMapWithLocations(map) {
     let icon = {
-        url: "Htatic/bike1.png"
+        url: "static/bike1.png",
+        scaledSize: new google.maps.Size(50, 50)
     };
     return (response) => {
         response.json().then((positions) => {
