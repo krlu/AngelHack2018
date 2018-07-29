@@ -1,6 +1,7 @@
 const uuid = require('uuid/v4');
 
-const CLUSTER_SIZE = parseFloat(process.env.CLUSTER_SIZE);
+const CLUSTER_MIN = parseInt(process.env.CLUSTER_MIN);
+const CLUSTER_MAX = parseInt(process.env.CLUSTER_MAX);
 const CLUSTER_DEVIATION = parseFloat(process.env.CLUSTER_DEVIATION);
 const LATLON_PRECISION = parseInt(process.env.LATLON_PRECISION);
 
@@ -8,6 +9,10 @@ exports.handler = async (event, context, callback) => {
     const locations = [
         ...generateCluster(37.775893, -122.418186), // Uber HQ
         ...generateCluster(37.778557, -122.419067), // SF City Hall
+        ...generateCluster(37.784350, -122.407468), // Westfield Mall
+        ...generateCluster(37.776778, -122.395256), // Caltrain Station
+        ...generateCluster(37.761333, -122.426299), // Dolores Park
+        ...generateCluster(37.784511, -122.430053), // Japantown
     ];
 
     const res = {
@@ -24,7 +29,8 @@ exports.handler = async (event, context, callback) => {
 
 const generateCluster = (lat, lon) => {
     const locations = [];
-    for (let i = 0; i < CLUSTER_SIZE; i++) {
+    const size = Math.floor(Math.random() * (CLUSTER_MAX - CLUSTER_MIN) + CLUSTER_MIN);
+    for (let i = 0; i < size; i++) {
         locations.push({
             uuid: uuid(),
             latitude: trim(lat + getRandomDeviation()),
