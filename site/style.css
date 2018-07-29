@@ -1,0 +1,22 @@
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map {
+    height: 90vh;
+    width: 100vw;
+}
+
+#search-button {
+    width: 100px;
+    height: 5vh;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
