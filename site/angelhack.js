@@ -11,15 +11,23 @@ var directionsDisplay;
 var fromPlacesService;
 var toPlacesService;
 
-function calculateRoute(destination) {
+function calculateRoute(dropoff) {
 	let request = {
 		origin: {
 			placeId: fromPlacesService.getPlace().place_id
 		},
 		destination: {
-			lat: destination.latitude,
-			lng: destination.longitude
+			placeId: toPlacesService.getPlace().place_id
 		},
+		waypoints: [
+			{
+				location: {
+					lat: dropoff.latitude,
+					lng: dropoff.longitude
+				},
+				stopover: true
+			}
+		],
 		travelMode: google.maps.TravelMode.BICYCLING
 	}
 
