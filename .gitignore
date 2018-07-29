@@ -16,3 +16,5 @@ tags
 # Persistent undo
 [._]*.un~
 
+**.zip
+**/node_modules/
