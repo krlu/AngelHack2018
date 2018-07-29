@@ -8,16 +8,17 @@ const markerImagePath = 'static/bike_small_'
 var map;
 var directionsService;
 var directionsDisplay;
+var fromPlacesService;
+var toPlacesService;
 
 function calculateRoute(destination) {
 	let request = {
+		origin: {
+			placeId: fromPlacesService.getPlace().place_id
+		},
 		destination: {
 			lat: destination.latitude,
 			lng: destination.longitude
-		},
-		origin: {
-			lat: 37.767648,
-			lng: -122.425588
 		},
 		travelMode: google.maps.TravelMode.BICYCLING
 	}
@@ -31,7 +32,9 @@ function calculateRoute(destination) {
 
 function getDropoffLocation() {
     fetch(baseUrl + dropoffPath, {
-        method: "POST"
+        method: "POST",
+		latitude: toPlacesService.getPlace().geometry.location.lat,
+		longitude: toPlacesService.getPlace().geometry.location.lng
     }).then((response) =>
         response.json().then((circle) => {
             new google.maps.Circle({
@@ -112,4 +115,7 @@ function initMap() {
     fetch(baseUrl + locationsPath).then(populateMapWithLocations(map));
 
 	directionsDisplay.setMap(map);
+
+	fromPlacesService = new google.maps.places.Autocomplete(document.getElementById('origin-search'));
+	toPlacesService = new google.maps.places.Autocomplete(document.getElementById('dest-search'));
 }

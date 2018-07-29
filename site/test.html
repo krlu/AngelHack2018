@@ -8,13 +8,21 @@
         <script
                 src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script
-              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgWOXbP_fZEy8B1iTL08QYWODXqcd8A2s&callback=initMap"
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgWOXbP_fZEy8B1iTL08QYWODXqcd8A2s&callback=initMap&libraries=places"
               async defer></script>
     </head>
     <body>
+		<div id="controls">
+			<div id="search-boxes">
+				<label for="origin-search">from:</label>
+				<input id="origin-search" class="places-search" type="search"></input>
+				<label for="dest-search">to:</label>
+				<input id="dest-search" class="places-search" type="search"></input>
+			</div>
+			<button id="search-button" type="button" onclick="getDropoffLocation()">
+				Go!
+			</button>
+		</div>
         <div id="map"></div>
-        <button id="search-button" type="button" onclick="getDropoffLocation()">
-            Go!
-        </button>
     </body>
 </html>
