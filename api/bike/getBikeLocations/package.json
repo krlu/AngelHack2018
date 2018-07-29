@@ -1,0 +1,17 @@
+{
+  "name": "api.bike.getbikelocations",
+  "version": "1.0.0",
+  "description": "gets locations of all bicycles",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf node_modules lambda.zip",
+    "zip": "zip -r lambda.zip .",
+    "lambda-update": "aws lambda update-function-code --function-name getBikeLocations --zip-file fileb://./lambda.zip",
+    "upload": "npm run clean && npm i && npm run zip && npm run lambda-update"
+  },
+  "author": "ziyuan.m.wang@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
+}

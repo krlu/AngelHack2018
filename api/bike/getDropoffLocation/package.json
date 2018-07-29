@@ -1,0 +1,14 @@
+{
+  "name": "api.bike.getdropofflocation",
+  "version": "1.0.0",
+  "description": "get bicycle dropoff location",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf node_modules lambda.zip",
+    "zip": "zip -r lambda.zip .",
+    "lambda-update": "aws lambda update-function-code --function-name getDropoffLocation --zip-file fileb://./lambda.zip",
+    "upload": "npm run clean && npm i && npm run zip && npm run lambda-update"
+  },
+  "author": "ziyuan.m.wang@gmail.com",
+  "license": "ISC"
+}
