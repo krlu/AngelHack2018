@@ -6,6 +6,28 @@ const dropoffPath = "/bike/dropoff"
 const markerImagePath = 'static/bike_small_'
 
 var map;
+var directionsService;
+var directionsDisplay;
+
+function calculateRoute(destination) {
+	let request = {
+		destination: {
+			lat: destination.latitude,
+			lng: destination.longitude
+		},
+		origin: {
+			lat: 37.767648,
+			lng: -122.425588
+		},
+		travelMode: google.maps.TravelMode.BICYCLING
+	}
+
+	directionsService.route(request, (response, status) => {
+		if (status == "OK") {
+			directionsDisplay.setDirections(response);
+		}
+	})
+}
 
 function getDropoffLocation() {
     fetch(baseUrl + dropoffPath, {
@@ -21,7 +43,8 @@ function getDropoffLocation() {
                       map: map,
                       center: {lat: circle.latitude, lng: circle.longitude},
                       radius: circle.radius
-                    })
+                    });
+			calculateRoute(circle);
         })
     )
 }
@@ -56,6 +79,9 @@ function populateMapWithLocations(map) {
 }
 
 function initMap() {
+    directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
+
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.77960, lng: -122.429322},
         mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -84,4 +110,6 @@ function initMap() {
     });
 
     fetch(baseUrl + locationsPath).then(populateMapWithLocations(map));
+
+	directionsDisplay.setMap(map);
 }
